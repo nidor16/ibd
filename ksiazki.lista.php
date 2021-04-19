@@ -16,6 +16,7 @@ $zapytanie = $ksiazki->pobierzZapytanie($_GET);
 // dodawanie warunków stronicowania i generowanie linków do stron
 $stronicowanie = new Stronicowanie($_GET, $zapytanie['parametry']);
 $linki = $stronicowanie->pobierzLinki($zapytanie['sql'], 'ksiazki.lista.php');
+$obecnyZakres = $stronicowanie->pobierzObecnyZakres($zapytanie['sql']);
 $select = $stronicowanie->dodajLimit($zapytanie['sql']);
 $lista = $ksiazki->pobierzStrone($select, $zapytanie['parametry']);
 
@@ -97,6 +98,10 @@ $lista = $ksiazki->pobierzStrone($select, $zapytanie['parametry']);
 
     <nav class="text-center">
         <?= $linki ?>
+    </nav>
+
+    <nav class="text-left">
+        <?= $obecnyZakres ?>
     </nav>
 
 <?php include 'footer.php'; ?>

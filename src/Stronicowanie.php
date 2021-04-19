@@ -121,6 +121,14 @@ class Stronicowanie
         return $linki;
     }
 
+    public function pobierzObecnyZakres(string $select) : string{
+        $rekordy = $this->db->policzRekordy($select, $this->parametryZapytania);
+        $pierwszyRekordNumer = $rekordy > 0 ? $this->strona * $this->naStronie + 1 : 0;
+        $ostatniRekordNumer = min($pierwszyRekordNumer + $this->naStronie - 1, $rekordy);
+        $wynik = sprintf('Wyświetlono %s - %s z %s rekordów', $pierwszyRekordNumer, $ostatniRekordNumer, $rekordy);
+        return $wynik;
+    }
+
     /**
      * Przetwarza parametry wyszukiwania.
      * Wyrzuca zbędne elementy i tworzy gotowy do wstawienia w linku zestaw parametrów.
