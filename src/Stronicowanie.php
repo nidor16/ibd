@@ -71,10 +71,24 @@ class Stronicowanie
     public function pobierzLinki(string $select, string $plik): string
     {
         $rekordow = $this->db->policzRekordy($select, $this->parametryZapytania);
-        $liczbaStron = ceil($rekordow / $this->naStronie);
+        $liczbaStron = (int) ceil($rekordow / $this->naStronie);
         $parametry = $this->_przetworzParametry();
 
         $linki = "<nav><ul class='pagination'>";
+        if($this->strona >= 1){
+            $linki .= sprintf(
+                "<li class='page-item'><a href='%s?%s&strona=%d' class='page-link'>Początek</a></li>",
+                $plik,
+                $parametry,
+                0
+            );
+            $linki .= sprintf(
+                "<li class='page-item'><a href='%s?%s&strona=%d' class='page-link'>Poprzednia</a></li>",
+                $plik,
+                $parametry,
+                $this->strona - 1
+            );
+        }
         for ($i = 0; $i < $liczbaStron; $i++) {
             if ($i == $this->strona) {
                 $linki .= sprintf("<li class='page-item active'><a class='page-link'>%d</a></li>", $i + 1);
@@ -87,6 +101,20 @@ class Stronicowanie
                     $i + 1
                 );
             }
+        }
+        if($this->strona < $liczbaStron - 1){
+            $linki .= sprintf(
+                "<li class='page-item'><a href='%s?%s&strona=%d' class='page-link'>Następna</a></li>",
+                $plik,
+                $parametry,
+                $this->strona + 1
+            );
+            $linki .= sprintf(
+                "<li class='page-item'><a href='%s?%s&strona=%d' class='page-link'>Ostatnia</a></li>",
+                $plik,
+                $parametry,
+                $liczbaStron - 1
+            );
         }
         $linki .= "</ul></nav>";
 
