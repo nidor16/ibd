@@ -18,9 +18,10 @@ $stronicowanie = new Stronicowanie($_GET, $zapytanie['parametry']);
 $linki = $stronicowanie->pobierzLinki($zapytanie['sql'], 'ksiazki.lista.php');
 $select = $stronicowanie->dodajLimit($zapytanie['sql']);
 $lista = $ksiazki->pobierzStrone($select, $zapytanie['parametry']);
+// $lista = $ksiazki->pobierzWszystkie();
 ?>
 
-<h1>Książki</h1>
+<!-- <h1>Książki</h1>
 
 <table class="table table-striped table-condensed">
 	<thead>
@@ -54,7 +55,8 @@ $lista = $ksiazki->pobierzStrone($select, $zapytanie['parametry']);
 			</tr>
 		<?php endforeach; ?>
 	</tbody>
-</table>
+</table> -->
+
     <h1>Książki</h1>
 
     <form method="get" action="" class="form-inline mb-4">
@@ -117,8 +119,8 @@ $lista = $ksiazki->pobierzStrone($select, $zapytanie['parametry']);
                     <?php endif; ?>
                 </td>
                 <td><?= $ks['tytul'] ?></td>
-                <td><?= $ks['id_autora'] ?></td>
-                <td><?= $ks['id_kategorii'] ?></td>
+                <td><?= $ks['nazwisko'] ?> <?= $ks['imie'] ?></td>
+                <td><?= $ks['nazwa'] ?></td>
                 <td><?= $ks['cena'] ?></td>
                 <td>
                     <a href="#" title="dodaj do koszyka"><i class="fas fa-cart-plus"></i></a>

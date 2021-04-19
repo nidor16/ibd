@@ -63,7 +63,10 @@ class Ksiazki
     public function pobierzZapytanie(array $params = []): array
     {
         $parametry = [];
-        $sql = "SELECT k.* FROM ksiazki k WHERE 1=1 ";
+        $sql = "SELECT k.*, a.imie, a.nazwisko, kat.nazwa FROM ksiazki k 
+                LEFT JOIN autorzy a ON k.id_autora = a.id 
+				LEFT JOIN kategorie kat ON k.id_kategorii = kat.id
+                WHERE 1=1";
 
         // dodawanie warunków do zapytanie
         if (!empty($params['fraza'])) {
@@ -85,6 +88,8 @@ class Ksiazki
                 $sql .= " ORDER BY " . $params['sortowanie'];
             }
         }
+
+
 
         return ['sql' => $sql, 'parametry' => $parametry];
     }
