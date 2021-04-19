@@ -70,7 +70,9 @@ class Ksiazki
 
         // dodawanie warunków do zapytanie
         if (!empty($params['fraza'])) {
-            $sql .= "AND k.tytul LIKE :fraza ";
+            $sql .= "AND k.tytul LIKE :fraza OR
+                         CONCAT(a.nazwisko, ' ', a.imie) LIKE :fraza OR
+                         k.opis LIKE :fraza ";
             $parametry['fraza'] = "%$params[fraza]%";
         }
         if (!empty($params['id_kategorii'])) {
