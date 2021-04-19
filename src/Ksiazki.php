@@ -66,7 +66,7 @@ class Ksiazki
         $sql = "SELECT k.*, a.imie, a.nazwisko, kat.nazwa FROM ksiazki k 
                 LEFT JOIN autorzy a ON k.id_autora = a.id 
 				LEFT JOIN kategorie kat ON k.id_kategorii = kat.id
-                WHERE 1=1";
+                WHERE 1=1 ";
 
         // dodawanie warunków do zapytanie
         if (!empty($params['fraza'])) {
