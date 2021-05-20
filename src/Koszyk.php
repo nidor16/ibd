@@ -48,6 +48,17 @@ class Koszyk
 		return $this->db->dodaj('koszyk', $dane);
 	}
 
+	public function pobierzCalkowitaCene(string $idSesji): float
+    {
+		$sql = "SELECT SUM(ks.cena * ko.liczba_sztuk) cena
+				FROM ksiazki ks JOIN koszyk ko ON ks.id = ko.id_ksiazki
+				WHERE ko.id_sesji = '" . $idSesji . "'";
+
+		$value = $this->db->pobierzWszystko($sql);
+
+		return round((float) $value["0"]['cena'], 2);
+	}
+
 	/**
 	 * Sprawdza, czy podana książka znajduje się w koszyku.
 	 *

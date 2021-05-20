@@ -64,6 +64,16 @@ $listaKsiazek = $koszyk->pobierzWszystkie();
 						</td>
 					</tr>
 				<?php endforeach; ?>
+				<tr>
+					<td style="text-align: right"></td>
+					<td style="text-align: right"></td>
+					<td style="text-align: right"></td>
+					<td style="text-align: right"></td>
+					<td style="text-align: right"></td>
+					<th style="text-align: right">Cena całkowita:</th>
+					<td style="text-align: left"><?= $koszyk->pobierzCalkowitaCene(session_id()); ?></td>
+					<td style="text-align: right"></td>
+				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
