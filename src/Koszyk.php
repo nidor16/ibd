@@ -59,6 +59,26 @@ class Koszyk
 		return round((float) $value["0"]['cena'], 2);
 	}
 
+	public function zwiekszLiczbeSztuk(int $idKsiazki, string $idSesji): bool
+    {
+		if($this->czyIstnieje($idKsiazki, $idSesji)){
+			$sql = "SELECT *
+			FROM koszyk ko
+			WHERE ko.id_ksiazki = '" . $idKsiazki . "'
+			AND ko.id_sesji = '" . $idSesji . "'
+			LIMIT 1";
+
+			$idKoszyka =  $this->db->pobierzWszystko($sql)[0]["id"];
+			$ilosc = $this->db->pobierzWszystko($sql)[0]["liczba_sztuk"] + 1;
+
+			$this->db->aktualizuj('koszyk', ['liczba_sztuk' => $ilosc], $idKoszyka);
+
+			return true;
+		}
+
+		return false;
+	}
+
 	/**
 	 * Sprawdza, czy podana książka znajduje się w koszyku.
 	 *
