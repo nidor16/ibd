@@ -48,6 +48,22 @@ class Koszyk
 		return $this->db->dodaj('koszyk', $dane);
 	}
 
+	public function usun(int $idKsiazki, string $idSesji): int
+    {
+		$sql = "SELECT id
+				FROM koszyk ko 
+				WHERE ko.id_ksiazki = '" . $idKsiazki . "'
+				AND ko.id_sesji = '" . $idSesji . "'
+				LIMIT 1";
+
+		$id = (int) $this->db->pobierzWszystko($sql)[0]["id"];
+
+		var_dump($id);
+
+		return $this->db->usun('koszyk', $id);
+		// return $this->db->usun('koszyk', )
+	}
+
 	public function pobierzCalkowitaCene(string $idSesji): float
     {
 		$sql = "SELECT SUM(ks.cena * ko.liczba_sztuk) cena
