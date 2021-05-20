@@ -1,6 +1,7 @@
 <?php
 require_once 'vendor/autoload.php';
-session_start();
+
+include 'header.php';
 
 use Ibd\Koszyk;
 
@@ -13,7 +14,6 @@ if(isset($_POST['zmien'])) {
 
 $listaKsiazek = $koszyk->pobierzWszystkie();
 
-include 'header.php';
 ?>
 
 <h2>Koszyk</h2>
