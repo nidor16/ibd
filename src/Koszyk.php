@@ -23,8 +23,11 @@ class Koszyk
 	public function pobierzWszystkie(): array
     {
 		$sql = "
-			SELECT ks.*, ko.liczba_sztuk, ko.id AS id_koszyka
-			FROM ksiazki ks JOIN koszyk ko ON ks.id = ko.id_ksiazki
+			SELECT ks.*, ko.liczba_sztuk, a.imie, a.nazwisko, kat.nazwa, ko.id AS id_koszyka
+			FROM ksiazki ks 
+			LEFT JOIN autorzy a ON ks.id_autora = a.id 
+			LEFT JOIN kategorie kat ON ks.id_kategorii = kat.id
+			JOIN koszyk ko ON ks.id = ko.id_ksiazki
 			WHERE ko.id_sesji = '" . session_id() . "'
 			ORDER BY ko.data_dodania DESC";
 

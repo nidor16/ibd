@@ -3,6 +3,7 @@ require_once 'vendor/autoload.php';
 
 include 'header.php';
 
+use Ibd\Ksiazki;
 use Ibd\Koszyk;
 
 $koszyk = new Koszyk();
@@ -13,7 +14,6 @@ if(isset($_POST['zmien'])) {
 }
 
 $listaKsiazek = $koszyk->pobierzWszystkie();
-
 ?>
 
 <h2>Koszyk</h2>
@@ -45,8 +45,8 @@ $listaKsiazek = $koszyk->pobierzWszystkie();
 							<?php endif; ?>
 						</td>
 						<td><?= $ks['tytul'] ?></td>
-						<td><?= $ks['id_autora'] ?></td>
-						<td><?= $ks['id_kategorii'] ?></td>
+						<td><?= $ks['nazwisko'] ?> <?= $ks['imie'] ?></td>
+						<td><?= $ks['nazwa'] ?></td>
 						<td><?= $ks['cena'] ?></td>
 						<td>
 							<div style="width: 50px">

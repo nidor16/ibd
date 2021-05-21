@@ -21,7 +21,7 @@ const usunZKoszyka = async (e) => {
     if (a) {
         e.preventDefault()
         const href = a.getAttribute('href')
-        const response = await fetch(href, {method: 'GET'})
+        const response = await fetch(href, {method: 'POST'})
         const txt = await response.text()
 
         if (txt === 'ok') {
@@ -36,7 +36,11 @@ const usunZKoszyka = async (e) => {
 
 document.body.onload = () => {
     const ksiazki = document.querySelector('#ksiazki')
+    const koszyk = document.querySelector('#koszyk')
     if (ksiazki) {
         ksiazki.addEventListener('click', dodajDoKoszyka)
+    }
+    if (koszyk){
+        koszyk.addEventListener('click', usunZKoszyka)
     }
 }
