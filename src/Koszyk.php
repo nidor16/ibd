@@ -120,7 +120,7 @@ class Koszyk
 	 */
 	public function zmienLiczbeSztuk(array $dane): void
 	{
-		foreach($dane as $idKoszyka => $ilosc) {
+		foreach ($dane as $idKoszyka => $ilosc) {
 			if ($ilosc <= 0) {
                 $this->db->usun('koszyk', $idKoszyka);
             } else {
@@ -129,4 +129,14 @@ class Koszyk
 		}
 	}
 
+    /**
+     * Czyści koszyk.
+     *
+     * @param string $idSesji
+     * @return bool
+     */
+    public function wyczysc(string $idSesji): bool
+    {
+        return $this->db->wykonaj("DELETE FROM koszyk WHERE id_sesji = :id_sesji", ['id_sesji' => $idSesji]);
+    }
 }

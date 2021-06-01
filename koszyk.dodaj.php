@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_GET['id'])) {
 				echo 'ok';
 			}
     } else {
-			// książki nie ma w koszyku, dodaj do koszyka
-			if ($koszyk->dodaj($_GET['id'], session_id())) {
-				echo 'ok';
-			}
+        // książki nie ma w koszyku, dodaj do koszyka
+        if ($koszyk->dodaj($_GET['id'], session_id())) {
+            echo 'ok';
+        }
     }
 }
