@@ -1,15 +1,22 @@
 <?php
 require_once 'vendor/autoload.php';
-session_start();
 
 use Ibd\Uzytkownicy;
 use Valitron\Validator;
 
 $uzytkownicy = new Uzytkownicy();
 $v = new Validator($_POST);
+$v->addInstanceRule('uniqueEmail', function ($name, $email) use ($uzytkownicy){
+    return !$uzytkownicy->mailIstnieje($email);
+}, 'duplicated');
+$v->addInstanceRule('uniqueLogin', function ($name, $login) use ($uzytkownicy){
+    return !$uzytkownicy->loginIstnieje($login);
+}, 'duplicated');
 
 if (isset($_POST['zapisz'])) {
     $v->rule('required', ['imie', 'nazwisko', 'adres', 'email', 'login', 'haslo']);
+    $v->rule('uniqueEmail', ['email']);
+    $v->rule('uniqueLogin', ['login']);
 
     if ($v->validate()) {
         // brak błędów, można dodać użytkownika

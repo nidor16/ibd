@@ -42,6 +42,7 @@ document.body.onload = () => {
     }
     if (koszyk){
         koszyk.addEventListener('click', usunZKoszyka)
+    }
 
     // autorzy
     document.querySelectorAll('.aUsunAutora').forEach(a => a.addEventListener('click', usunRekord))

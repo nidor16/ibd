@@ -145,4 +145,26 @@ class Uzytkownicy
 
         return $this->db->aktualizuj('uzytkownicy', $update, $id);
     }
+
+    public function mailIstnieje(string $email)
+    {
+        $r = $this->db->pobierzWszystko(
+            "SELECT * 
+                FROM uzytkownicy 
+                WHERE email = :email", ['email' => $email]
+        );
+
+        return !empty($r);
+    }
+
+    public function loginIstnieje(string $login)
+    {
+        $r = $this->db->pobierzWszystko(
+            "SELECT * 
+                FROM uzytkownicy 
+                WHERE login = :login", ['login' => $login]
+        );
+
+        return !empty($r);
+    }
 }
